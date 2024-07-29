@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
 import 'package:musix/controllers/itune_controller.dart';
 import 'package:musix/widgets/app_bar_widget.dart';
+import 'package:musix/widgets/drawer.dart';
 import 'package:musix/widgets/dropdown.dart';
 import 'package:musix/widgets/initial_grid_view.dart';
 import 'package:musix/widgets/loading_animation.dart';
@@ -23,6 +24,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBarWidget(),
+      drawer: MusixDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

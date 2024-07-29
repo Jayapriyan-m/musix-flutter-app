@@ -31,13 +31,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: SafeArea(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(
-                icon: const Icon(Icons.menu, color: Colors.white),
-                onPressed: () {
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.menu, color: Colors.white),
+              //   onPressed: () {
+              //   },
+              // ),
               IconButton(
                 icon: const Icon(Icons.settings, color: Colors.white),
                 onPressed: () {

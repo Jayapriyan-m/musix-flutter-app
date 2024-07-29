@@ -59,7 +59,6 @@ class ItunesController extends GetxController {
     "Michael Jackson",
     "Taylor Swift",
     "Arijit Singh",
-    "Ariana Grande",
     "Ed Sheeran"
   ];
 
