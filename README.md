@@ -37,5 +37,5 @@ Musix is a Flutter-based music app integrated with iTunes, providing music previ
 ## Contact
 For any inquiries or feedback, please reach out to:
 - Name : Jayapriyan M
-- Email : jayapriyan@gmail.com
+- Email : jayapriyan11802@gmail.com
   
