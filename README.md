@@ -23,3 +23,19 @@ Musix is a Flutter-based music app integrated with iTunes, providing music previ
    ```bash
    git clone https://github.com/Jayapriyan-m/musix-flutter-app.git
    cd musix-flutter-app
+   
+2. Install dependencies
+
+   ```bash
+   flutter pub get
+
+3. Run the App
+
+   ```bash
+   flutter run
+
+## Contact
+For any inquiries or feedback, please reach out to:
+- Name : Jayapriyan M
+- Email : jayapriyan11802@gmail.com
+  
