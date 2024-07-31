@@ -1,9 +1,12 @@
 
 import 'dart:math';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
 import 'package:musix/models/itune_model.dart';
+import 'package:musix/widgets/all_snack_bars.dart';
 
 
 class ItunesController extends GetxController {
@@ -25,11 +28,25 @@ class ItunesController extends GetxController {
     search();
   }
 
+  bool isInitialScreen = true;
+  // void firstLoad(){
+  //   isInitialScreen = true;
+  // }
+
 
   // void enableFilter(bool state){
   //   isFilter = state;
   //   update();
   // }
+
+  // For Theme Toggling dark, light mode
+  var isDarkMode = true.obs;
+
+  ThemeMode get theme => isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
+
+  void toggleTheme() {
+    isDarkMode.value = !isDarkMode.value;
+  }
 
   //media type list
   List<String> mediaTypeList = [
@@ -56,7 +73,7 @@ class ItunesController extends GetxController {
     "AR Rahman",
     "Alan Walker",
     "Justin Beiber",
-    "Michael Jackson",
+    "Imagine Dragons",
     "Taylor Swift",
     "Arijit Singh",
     "Ed Sheeran"
@@ -67,6 +84,13 @@ class ItunesController extends GetxController {
 
   void search() async {
     try {
+
+      var connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectivityResult.none) {
+        noInternetSnackbar();
+        return;
+      }
+
       isLoading.value = true;
       noResultsFound.value = false;
       searchResults.clear(); // Clearing old results
@@ -75,7 +99,7 @@ class ItunesController extends GetxController {
                   ? await itunesService.search(term: searchFieldController.text, media: mediaType.value)
                   : await itunesService.search(term: currentInitTerm, media: mediaType.value);
 
-      print('format result --- $results');
+      // print('format result --- $results');
       if (results.isEmpty) {
         noResultsFound.value = true;
       } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
@@ -17,7 +18,7 @@ class AboutPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255,252,32,65),
+                color: Color(0xFFEE353A),
               ),
               textAlign: TextAlign.center,
             ),
@@ -110,13 +111,15 @@ class AboutPage extends StatelessWidget {
               onPressed: () async {
                 final Uri url = Uri.parse('https://github.com/Jayapriyan-m/musix-flutter-app');
                 if (await canLaunchUrl(url)) {
-                await launchUrl(url);
+                  await launchUrl(url);
                 } else {
-                throw 'Could not launch $url';
+                  Get.snackbar('Error', 'Could not launch $url',
+                      snackPosition: SnackPosition.BOTTOM);
                 }
               },
               child: Text('GitHub Repo'),
             ),
+
             SizedBox(height: 16),
             Text(
               '© 2024 MusiX. All rights reserved.',

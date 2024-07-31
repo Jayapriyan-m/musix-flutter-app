@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                       // controller.isFilter
                       //     ? controller.enableFilter(false)
                       //     : controller.enableFilter(true);
-                      if(controller.isFilter == true){
+                      if(controller.isFilter.value){
                         controller.isFilter.value = false;
                         controller.clearFilter();
                       }else{
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                               left: 6.w, top: 6.h, bottom: 6.h, right: 3.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: controller.isFilter == true
+                            color: controller.isFilter.value
                                 ? Color.fromARGB(255, 252, 32, 65)
                                 : Color.fromARGB(255,48, 48,48,),
                           ),
@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.bold,
+                                  // color: controller.isDarkMode.value ? Colors.white : Colors.black,
                                 ),
                               ),
                             ],
@@ -83,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: 4.w,
                   ),
-                  controller.isFilter == true
+                  controller.isFilter.value
                       ? Row(
                         children: [
                           Obx(() {
@@ -123,15 +124,15 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            controller.searchFieldController.text.isNotEmpty
-            ? Container()
-            : Padding(
+            (controller.searchFieldController.text.isEmpty && controller.searchResults.isEmpty)
+            ? Padding(
               padding: EdgeInsets.only(top: 5.h,left: 15.w,bottom:20.w,right: 15.w ),
               child: Text("Top Tracks of ${controller.currentInitTerm}",style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),),
-            ),
+            )
+            : Container(),
             controller.searchFieldController.text.isNotEmpty
             ? Obx(() {
               if (controller.isLoading.value) {
@@ -180,9 +181,9 @@ class HomeScreen extends StatelessWidget {
                     itemCount: controller.searchResults.length ,
                     itemBuilder: (context, index) {
                       final item = controller.searchResults[index];
-                      if (kDebugMode) {
-                        print("check music track - name ${item.trackName} -> ${item.previewUrl}");
-                      }
+                      // if (kDebugMode) {
+                      //   print("check music track - name ${item.trackName} -> ${item.previewUrl}");
+                      // }
                       return GridItem(track: item);
                     },
                   ),

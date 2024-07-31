@@ -29,7 +29,7 @@ class Dropdown extends StatelessWidget {
             padding: EdgeInsets.only(left: 9.w,top: 6.h,bottom: 6.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: (selectedValue != firstValue) ? Color.fromARGB(255,252,32,65) : Color.fromARGB(255,48,48,48,),
+              color: (selectedValue != firstValue) ? Color(0xFFEE353A) : Color.fromARGB(255,48,48,48,),
             ),
             child: Row(
               children: [
@@ -64,13 +64,13 @@ class Dropdown extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               border: Border.all(
                   color: (selectedValue != firstValue)
-                      ? Color.fromARGB(255,252,32,65)
+                      ? Color(0xFFEE353A)
                       : Colors.grey.shade300,
                   width: (selectedValue != firstValue) ? 2.5 : 1.5),
               boxShadow: [
                 BoxShadow(
                   color: (selectedValue != firstValue)
-                      ? Color.fromARGB(255,252,32,65).withOpacity(0.1)
+                      ? Color(0xFFEE353A).withOpacity(0.1)
                       : Colors.black.withOpacity(0.1),
                   blurRadius: 8,
                   offset: Offset(2, 2),
@@ -89,7 +89,7 @@ class Dropdown extends StatelessWidget {
                       style: TextStyle(
                           color:
                               (selectedValue != firstValue && selectedValue == value)
-                                  ? Color.fromARGB(255,252,32,65)
+                                  ? Color(0xFFEE353A)
                                   : Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
