@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
 import 'package:musix/models/itune_model.dart';
+import 'package:musix/screens/home_page.dart';
+import 'package:musix/screens/search_result_page.dart';
 import 'package:musix/widgets/all_snack_bars.dart';
 
 
@@ -25,12 +27,14 @@ class ItunesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    search();
+    search(true);
+    // firstLoad();
   }
 
   bool isInitialScreen = true;
   // void firstLoad(){
   //   isInitialScreen = true;
+  //   search();
   // }
 
 
@@ -80,9 +84,9 @@ class ItunesController extends GetxController {
   ];
 
   static var randomIndex = Random().nextInt(initialSearchTermsList.length);
-  String currentInitTerm = initialSearchTermsList[randomIndex];
+  var currentInitTerm = initialSearchTermsList[randomIndex].obs;
 
-  void search() async {
+  void search(bool initialLoad) async {
     try {
 
       var connectivityResult = await Connectivity().checkConnectivity();
@@ -95,9 +99,13 @@ class ItunesController extends GetxController {
       noResultsFound.value = false;
       searchResults.clear(); // Clearing old results
 
+      searchFieldController.text.isNotEmpty
+        ? Get.to(SeacrhResultScreen())
+        : Get.to(HomeScreen());
+
        var results = searchFieldController.text.isNotEmpty
                   ? await itunesService.search(term: searchFieldController.text, media: mediaType.value)
-                  : await itunesService.search(term: currentInitTerm, media: mediaType.value);
+                  : await itunesService.search(term: currentInitTerm.value, media: "music");
 
       // print('format result --- $results');
       if (results.isEmpty) {
@@ -118,6 +126,7 @@ class ItunesController extends GetxController {
       noResultsFound.value = true;
     } finally {
       isLoading.value = false;
+      isInitialScreen = false;
     }
   }
 
@@ -125,7 +134,7 @@ class ItunesController extends GetxController {
     if (newMediaType != mediaType.value) {
       mediaType.value = newMediaType;
       if (searchFieldController.text.isNotEmpty) {
-        search();
+        search(false);
       }
     }
   }
@@ -134,7 +143,7 @@ class ItunesController extends GetxController {
     if (newResultOrder != resultOrder.value) {
       resultOrder.value = newResultOrder;
       if (searchFieldController.text.isNotEmpty) {
-        search();
+        search(false);
       }
     }
   }
@@ -144,7 +153,7 @@ class ItunesController extends GetxController {
       mediaType.value = "all";
       resultOrder.value = "top hits";
         if (searchFieldController.text.isNotEmpty) {
-          search();
+          search(false);
         }
     }
   }

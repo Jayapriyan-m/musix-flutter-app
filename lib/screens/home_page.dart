@@ -33,133 +33,17 @@ class HomeScreen extends StatelessWidget {
             SearchField(),
             SizedBox(height: 10.h),
             Obx(() {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // controller.isFilter
-                      //     ? controller.enableFilter(false)
-                      //     : controller.enableFilter(true);
-                      if(controller.isFilter.value){
-                        controller.isFilter.value = false;
-                        controller.clearFilter();
-                      }else{
-                        controller.isFilter.value = true;
-                      }
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 5.h),
-                      child: Container(
-                          width: 70.w,
-                          padding: EdgeInsets.only(
-                              left: 6.w, top: 6.h, bottom: 6.h, right: 3.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: controller.isFilter.value
-                                ? Color.fromARGB(255, 252, 32, 65)
-                                : Color.fromARGB(255,48, 48,48,),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.filter_list_alt,
-                                size: 18.sp,
-                              ),
-                              SizedBox(
-                                width: 4.5.w,
-                              ),
-                              Text(
-                                'Filter',
-                                style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.bold,
-                                  // color: controller.isDarkMode.value ? Colors.white : Colors.black,
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  controller.isFilter.value
-                      ? Row(
-                        children: [
-                          Obx(() {
-                              return Dropdown(
-                                selectedValue: controller.mediaType.value,
-                                items: controller.mediaTypeList,
-                                onChanged: (String? newValue) {
-                                  if (newValue != null) {
-                                    controller.updateMediaType(newValue);
-                                    // controller.search();
-                                  }
-                                },
-                                title: "Media Type",
-                                firstValue: "all",
-                              );
-                            }),
-                          Obx(() {
-                            return Dropdown(
-                              selectedValue: controller.resultOrder.value,
-                              items: controller.resultOrderList,
-                              onChanged: (String? newValue) {
-                                if (newValue != null) {
-                                  controller.updateResultOrder(newValue);
-                                  // controller.search();
-                                }
-                              },
-                              title: "Result Order",
-                              firstValue: "top hits",
-                            );
-                          })
-                        ],
-                      )
-                      : Container()
-                ],
-              );
+              return !controller.noResultsFound.value && !controller.isLoading.value
+                  ?  Padding(
+                padding: EdgeInsets.only(top: 5.h,left: 15.w,bottom:20.w,right: 15.w ),
+                child: Text("Top Tracks of ${controller.currentInitTerm.value}",style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),),
+              )
+                  : Container();
             }),
-            SizedBox(
-              height: 10.h,
-            ),
-            (controller.searchFieldController.text.isEmpty && controller.searchResults.isEmpty)
-            ? Padding(
-              padding: EdgeInsets.only(top: 5.h,left: 15.w,bottom:20.w,right: 15.w ),
-              child: Text("Top Tracks of ${controller.currentInitTerm}",style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),),
-            )
-            : Container(),
-            controller.searchFieldController.text.isNotEmpty
-            ? Obx(() {
-              if (controller.isLoading.value) {
-                return Padding(
-                  padding: EdgeInsets.only(top: screenSize.height * 0.15),
-                  child: Center(child: MusicLoading()),
-                );
-              } else if (controller.noResultsFound.value) {
-                return Padding(
-                    padding: EdgeInsets.only(top: screenSize.height * 0.25),
-                    child: Center(child: Text('No results found.')));
-              } else {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.searchResults.length,
-                    itemBuilder: (context, index) {
-                      final item = controller.searchResults[index];
-                      if (kDebugMode) {
-                        print("check music track - name ${item.trackName} -> ${item.previewUrl}");
-                      }
-                      return MusicPlayerWidget(track: item);
-                    },
-                  ),
-                );
-              }
-            })
-            : Obx(() {
+            Obx(() {
               if (controller.isLoading.value) {
                 return Padding(
                   padding: EdgeInsets.only(top: screenSize.height * 0.15),
@@ -176,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
-                      childAspectRatio: 1.5,
+                      childAspectRatio: 1,
                     ),
                     itemCount: controller.searchResults.length ,
                     itemBuilder: (context, index) {

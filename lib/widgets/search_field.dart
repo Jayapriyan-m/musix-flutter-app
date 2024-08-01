@@ -33,7 +33,7 @@ class SearchField extends StatelessWidget {
       ),
       controller: controller.searchFieldController,
       onSubmitted: (value) {
-        controller.search();
+        controller.search(false);
       },
     );
   }

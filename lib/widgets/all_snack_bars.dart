@@ -24,17 +24,17 @@ void noInternetSnackbar() {
   Get.snackbar(
     'No Internet',
     'Please check your connection and try again.',
-    backgroundColor: Colors.red[800],  // Red background for error
-    colorText: Colors.white,           // White text color
-    snackPosition: SnackPosition.BOTTOM, // Position at the bottom
-    margin: EdgeInsets.all(10),          // Margins around the snackbar
-    borderRadius: 8,                     // Rounded corners
+    backgroundColor: Colors.red[800],
+    colorText: Colors.white,
+    snackPosition: SnackPosition.BOTTOM,
+    margin: EdgeInsets.all(10),
+    borderRadius: 8,
     icon: Icon(
-      Icons.wifi_off,                    // WiFi off icon
-      color: Colors.white,               // White icon color
+      Icons.wifi_off,
+      color: Colors.white,
     ),
-    shouldIconPulse: true,               // Pulsing icon animation
-    duration: Duration(seconds: 3),      // Snackbar duration
-    snackStyle: SnackStyle.FLOATING,     // Floating snackbar style
+    shouldIconPulse: true,
+    duration: Duration(seconds: 3),
+    snackStyle: SnackStyle.FLOATING,
   );
 }
