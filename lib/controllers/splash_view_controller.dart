@@ -5,14 +5,16 @@ import 'package:musix/screens/home_page.dart';
 
 class SplashController extends GetxController {
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
+
     navigateToHome();
   }
 
   void navigateToHome() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     // Get.put(ItunesController(itunesService: ItunesService()));
+    await Get.find<ItunesController>().search(true);
     Get.offAll(HomeScreen());
   }
 }

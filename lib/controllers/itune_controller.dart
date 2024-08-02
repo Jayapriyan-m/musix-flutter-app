@@ -25,9 +25,10 @@ class ItunesController extends GetxController {
   ItunesController({required this.itunesService});
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    search(true);
+    print("onInit called");
+    // await search(true);
     // firstLoad();
   }
 
@@ -86,7 +87,7 @@ class ItunesController extends GetxController {
   static var randomIndex = Random().nextInt(initialSearchTermsList.length);
   var currentInitTerm = initialSearchTermsList[randomIndex].obs;
 
-  void search(bool initialLoad) async {
+  Future<void> search(bool initialLoad) async {
     try {
 
       var connectivityResult = await Connectivity().checkConnectivity();

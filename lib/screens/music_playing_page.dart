@@ -41,16 +41,19 @@ class MusicPlayerPage extends StatelessWidget {
               SizedBox(height: 15),
               Image.network(track.artworkUrl100),
               SizedBox(height: 20),
-              !musicController.isPlaying.value || musicController.isPaused.value
+              track.previewUrl != 'null'
+              ? !musicController.isPlaying.value || musicController.isPaused.value
                   ? Padding(
                 padding: EdgeInsets.symmetric(vertical: 17),
-                child: track.previewUrl != 'null'
-                    ? Text('Click play to preview')
-                    : Text("Music not available :("),
+                child:
+                     Text('Click play to preview'),
               )
-                  : MusicLoading(),
+                  : MusicLoading()
+              : Text("Music not available :("),
+
               SizedBox(height: 20),
-              Column(
+              track.previewUrl != 'null'
+              ? Column(
                 children: [
                   Slider(
                     value: musicController.position.value.inSeconds.toDouble(),
@@ -89,7 +92,8 @@ class MusicPlayerPage extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
+              )
+                  :Container()
             ],
           );
         }),

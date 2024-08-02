@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
             SearchField(),
             SizedBox(height: 10.h),
             Obx(() {
+              print('no result val--${controller.noResultsFound.value}');
               return !controller.noResultsFound.value && !controller.isLoading.value
                   ?  Padding(
                 padding: EdgeInsets.only(top: 5.h,left: 15.w,bottom:20.w,right: 15.w ),
