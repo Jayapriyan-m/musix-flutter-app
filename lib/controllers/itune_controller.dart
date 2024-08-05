@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
+import 'package:musix/controllers/music_play_controller.dart';
 import 'package:musix/models/itune_model.dart';
 import 'package:musix/screens/home_page.dart';
 import 'package:musix/screens/search_result_page.dart';
@@ -94,6 +95,10 @@ class ItunesController extends GetxController {
       if (connectivityResult == ConnectivityResult.none) {
         noInternetSnackbar();
         return;
+      }
+
+      if(Get.find<MusicController>().isPlaying.value){
+        Get.find<MusicController>().stop();
       }
 
       isLoading.value = true;

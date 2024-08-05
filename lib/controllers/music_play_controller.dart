@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:musix/controllers/itune_controller.dart';
 import 'package:musix/models/itune_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MusicController extends GetxController {
   var isPlaying = false.obs;
@@ -9,6 +10,7 @@ class MusicController extends GetxController {
   var currentTrackIndex = 0.obs;
   var position = Duration().obs;
   var duration = Duration().obs;
+  var badgeShown = false.obs;
 
   AudioPlayer audioPlayer = AudioPlayer();
   late ItunesController itunesController; // Add a reference to ItunesController
@@ -17,8 +19,25 @@ class MusicController extends GetxController {
   void onInit() {
     super.onInit();
     itunesController = Get.find<ItunesController>(); // Initialize ItunesController
+    _loadBadgeShownStatus();
     audioPlayer.onDurationChanged.listen((d) => updateDuration(d));
     audioPlayer.onAudioPositionChanged.listen((p) => updatePosition(p));
+    audioPlayer.onPlayerCompletion.listen((_) => onComplete());
+  }
+
+  Future<void> _loadBadgeShownStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    badgeShown.value = prefs.getBool('badgeShown') ?? false;
+  }
+
+  Future<void> _saveBadgeShownStatus(bool shown) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('badgeShown', shown);
+  }
+
+  void setBadgeShown(bool shown) {
+    badgeShown.value = shown;
+    _saveBadgeShownStatus(shown);
   }
 
   void playPause(String url) {
@@ -68,5 +87,10 @@ class MusicController extends GetxController {
 
   void updateDuration(Duration duration) {
     this.duration.value = duration;
+  }
+
+  void onComplete() {
+    isPlaying.value = false;
+    isPaused.value = false;
   }
 }

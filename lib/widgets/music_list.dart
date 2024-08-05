@@ -21,7 +21,15 @@ class MusicPlayerWidget extends StatelessWidget {
         // musicController.tracks.add(track);
         musicController.currentTrackIndex.value = currentIndex ;
         musicController.playTrack(track);
-        Get.to(MusicPlayerPage());
+        // Get.to(MusicPlayerPage());
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (BuildContext context) {
+            return MusicPlayerPage();
+          },
+        );
       },
       child: ListTile(
         leading: Image.network(track.artworkUrl100),

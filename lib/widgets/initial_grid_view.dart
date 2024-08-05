@@ -8,8 +8,9 @@ import 'package:musix/widgets/loading_animation.dart';
 
 class GridItem extends StatelessWidget {
   final ItunesModel track;
+  final int currentIndex;
 
-  GridItem({required this.track});
+  GridItem({required this.track,required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,17 @@ class GridItem extends StatelessWidget {
     return  GestureDetector(
       onTap: (){
         // musicController.tracks.add(track);
+        musicController.currentTrackIndex.value = currentIndex ;
         musicController.playTrack(track);
-        Get.to(MusicPlayerPage());
+        // Get.to(MusicPlayerPage());
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (BuildContext context) {
+            return MusicPlayerPage();
+          },
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

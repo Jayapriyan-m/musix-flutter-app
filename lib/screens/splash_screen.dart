@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SplashScreen extends StatelessWidget {
   final SplashController splashController = Get.put(SplashController());
 
+
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;

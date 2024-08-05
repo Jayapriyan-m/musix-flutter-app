@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
 import 'package:musix/controllers/itune_controller.dart';
 import 'package:musix/widgets/app_bar_widget.dart';
+import 'package:musix/widgets/bottomBar.dart';
 import 'package:musix/widgets/drawer.dart';
 import 'package:musix/widgets/dropdown.dart';
 import 'package:musix/widgets/initial_grid_view.dart';
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       // if (kDebugMode) {
                       //   print("check music track - name ${item.trackName} -> ${item.previewUrl}");
                       // }
-                      return GridItem(track: item);
+                      return GridItem(track: item, currentIndex: index);
                     },
                   ),
                 );
@@ -78,6 +79,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
