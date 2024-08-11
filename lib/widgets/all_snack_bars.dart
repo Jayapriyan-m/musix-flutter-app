@@ -40,3 +40,43 @@ void noInternetSnackbar() {
     snackStyle: SnackStyle.FLOATING,         // Snackbar style (floating above other UI elements)
   );
 }
+
+/// Function to show a Snackbar indicating the track is removed from favorites.
+void removedFromFavorites() {
+  Get.snackbar(
+    'Removed from Favorites',
+    'Keep Listening Music',
+    backgroundColor: Colors.grey[900],
+    colorText: Colors.white,                 // Text color
+    snackPosition: SnackPosition.BOTTOM,     // Position of the Snackbar on the screen
+    margin: EdgeInsets.all(10),              // Margin around the Snackbar
+    borderRadius: 8,
+    icon: Icon(
+      Icons.heart_broken_outlined,
+      color: Colors.red,
+    ),
+    shouldIconPulse: true,                   // Pulse animation for the icon
+    duration: Duration(seconds: 2),          // How long the Snackbar is visible
+    snackStyle: SnackStyle.FLOATING,         // Snackbar style (floating above other UI elements)
+  );
+}
+
+/// Function to show a Snackbar indicating the track is added to favorites.
+void addedToFavorites() {
+  Get.snackbar(
+    'Added to Favorites',
+    'See all your Favorite Tracks on Menu',
+    backgroundColor: Colors.grey[900],
+    colorText: Colors.white,                 // Text color
+    snackPosition: SnackPosition.BOTTOM,     // Position of the Snackbar on the screen
+    margin: EdgeInsets.all(10),              // Margin around the Snackbar
+    borderRadius: 8,
+    icon: Icon(
+      Icons.favorite,
+      color: Colors.red,
+    ),
+    shouldIconPulse: true,                   // Pulse animation for the icon
+    duration: Duration(seconds: 2),          // How long the Snackbar is visible
+    snackStyle: SnackStyle.FLOATING,         // Snackbar style (floating above other UI elements)
+  );
+}

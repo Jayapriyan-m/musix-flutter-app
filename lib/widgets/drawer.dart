@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musix/controllers/itune_controller.dart';
 import 'package:musix/screens/about_page.dart';
+import 'package:musix/screens/favorite_tracks_page.dart';
 import 'package:musix/widgets/countries_popup.dart';
 
 class MusixDrawer extends StatelessWidget {
@@ -22,6 +23,13 @@ class MusixDrawer extends StatelessWidget {
                 backgroundColor: Colors.white, //  background color of the avatar
                 backgroundImage: AssetImage('assets/batman.jpeg'), // avatar image
               ),
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text('Favorite Tracks'),
+              onTap: () {
+                Get.to(FavoriteTracksScreen()); // Navigating to the Favorites Page
+              },
             ),
             Obx(() {
               return ListTile(

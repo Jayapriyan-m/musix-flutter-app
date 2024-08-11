@@ -29,6 +29,7 @@ class MusicController extends GetxController {
   void onInit() {
     super.onInit();
     itunesController = Get.find<ItunesController>();
+    _loadFavorites();
 
     // Loading the initial status of the badge from shared preferences
     _loadBadgeShownStatus();
@@ -128,6 +129,47 @@ class MusicController extends GetxController {
   void onComplete() {
     isPlaying.value = false;
     isPaused.value = false;
+  }
+
+  RxList<String> favoriteTracks = <String>[].obs;
+
+  Future<void> _loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favorites = prefs.getStringList('favorites') ?? [];
+    favoriteTracks.value = favorites;
+  }
+
+  bool isFavorite(String trackName) {
+    return favoriteTracks.contains(trackName);
+  }
+
+  Future<void> toggleFavorite(String trackName) async {
+    if (isFavorite(trackName)) {
+      favoriteTracks.remove(trackName);
+    } else {
+      favoriteTracks.add(trackName);
+    }
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('favorites', favoriteTracks.toList());
+  }
+
+  // Future<void> _loadFavorites() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   favoriteTracks.value = prefs.getStringList('favorites') ?? [];
+  // }
+
+  Future<void> addFavorite(String trackName) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!favoriteTracks.contains(trackName)) {
+      favoriteTracks.add(trackName);
+      await prefs.setStringList('favorites', favoriteTracks);
+    }
+  }
+
+  Future<void> removeFavorite(String trackName) async {
+    final prefs = await SharedPreferences.getInstance();
+    favoriteTracks.remove(trackName);
+    await prefs.setStringList('favorites', favoriteTracks);
   }
 }
 
