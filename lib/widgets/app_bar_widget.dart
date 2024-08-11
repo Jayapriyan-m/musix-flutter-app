@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
 import 'package:musix/controllers/itune_controller.dart';
 import 'package:musix/widgets/all_snack_bars.dart';
+import 'package:musix/widgets/countries_popup.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -72,7 +73,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     underDevelopmentSnackBar();
                   },
                 );
-              })
+              }),
+              IconButton(
+                  onPressed: (){
+                    Get.dialog(SelectCountry());
+                  },
+                  icon: Icon(
+                    Icons.language
+                  ))
             ],
           ),
         ),

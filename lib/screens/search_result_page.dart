@@ -160,9 +160,9 @@ class SeacrhResultScreen extends StatelessWidget {
                       itemCount: controller.searchResults.length,
                       itemBuilder: (context, index) {
                         final item = controller.searchResults[index];
-                        if (kDebugMode) {
-                          print("check music track - name ${item.trackName} -> ${item.previewUrl}");
-                        }
+                        // if (kDebugMode) {
+                        //   print("check music track - name ${item.trackName} -> ${item.previewUrl}");
+                        // }
                         return MusicPlayerWidget(track: item,currentIndex: index,);
                       },
                     ),

@@ -83,7 +83,7 @@ class BadgeLabel extends StatelessWidget {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              // mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RotationTransition(
                   turns: AlwaysStoppedAnimation(isPlaying ? 0.1 : 0),
@@ -97,13 +97,17 @@ class BadgeLabel extends StatelessWidget {
                 Flexible(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Text(
-                      label,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                    child: Container(
+                      width: screenSize.width * 0.8,
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        // textAlign: TextAlign.center,
                       ),
-                      overflow: TextOverflow.ellipsis, // Ensure text is not clipped
                     ),
                   ),
                 ),

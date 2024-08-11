@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musix/api_service/itune_api_service.dart';
+import 'package:musix/api_service/itunes_country_code_service.dart';
 import 'package:musix/controllers/music_play_controller.dart';
+import 'package:musix/models/country_model.dart';
 import 'package:musix/models/itune_model.dart';
 import 'package:musix/screens/home_page.dart';
 import 'package:musix/screens/search_result_page.dart';
@@ -18,8 +20,13 @@ class ItunesController extends GetxController {
   var noResultsFound = false.obs;
   var mediaType = 'all'.obs;
   var resultOrder = 'top hits'.obs;
+  // var country = 'all'.obs;
   TextEditingController searchFieldController = TextEditingController();
+  TextEditingController countrySearchController = TextEditingController();
   var isFilter = false.obs;
+
+  var countries = <Country>[].obs;
+  var selectedCountry = 'All'.obs;
 
   final ItunesService itunesService;
 
@@ -29,6 +36,7 @@ class ItunesController extends GetxController {
   void onInit() async{
     super.onInit();
     print("onInit called");
+    loadCountries();
     // await search(true);
     // firstLoad();
   }
@@ -110,8 +118,8 @@ class ItunesController extends GetxController {
         : Get.to(HomeScreen());
 
        var results = searchFieldController.text.isNotEmpty
-                  ? await itunesService.search(term: searchFieldController.text, media: mediaType.value)
-                  : await itunesService.search(term: currentInitTerm.value, media: "music");
+                  ? await itunesService.search(term: searchFieldController.text, media: mediaType.value, country: selectedCountry.value)
+                  : await itunesService.search(term: currentInitTerm.value, media: "music", country: selectedCountry.value);
 
       // print('format result --- $results');
       if (results.isEmpty) {
@@ -154,6 +162,16 @@ class ItunesController extends GetxController {
     }
   }
 
+  void updateCountry(String newCountry) {
+    if (newCountry != selectedCountry.value) {
+      selectedCountry.value = newCountry;
+      print("coun -- ${selectedCountry.value}");
+      if (searchFieldController.text.isNotEmpty) {
+        search(false);
+      }
+    }
+  }
+
   void clearFilter(){
     if (mediaType.value != "all" || resultOrder.value != "top hits") {
       mediaType.value = "all";
@@ -164,6 +182,19 @@ class ItunesController extends GetxController {
     }
   }
 
+  void loadCountries() async {
+    try {
+      var service = CountryService();
+      var loadedCountries = await service.loadCountryCodes();
+      countries.value = loadedCountries;
+    } catch (e) {
+      print('Error loading countries: $e');
+    }
+  }
+
+  void updateCountry2(String? value) {
+    selectedCountry.value = value ?? '';
+  }
 
 }
 

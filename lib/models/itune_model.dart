@@ -19,18 +19,20 @@ class ItunesModel {
     required this.trackPrice
   });
 
+  // Usually , creating models is good to handle, maintain , acces data easily.
+  // here I created model for accessing itunes response values by keys easily throughout the project
   factory ItunesModel.fromJson(Map<String, dynamic> json) {
     return ItunesModel(
       trackName: json['trackName'] ?? "Unknown Track",
       artistName: json['artistName'] ?? "Unknown Field",
-      artworkUrl100: json['artworkUrl100'] ?? "",
-      previewUrl: json['previewUrl'] ?? "null",
+      artworkUrl100: json['artworkUrl100'] ?? "", // image provied to the song
+      previewUrl: json['previewUrl'] ?? "null", // some seconds of music will play
       releaseDate: json['releaseDate'] ?? "",
       trackPrice: json['trackPrice'] ?? 0.0
     );
   }
 
-  static String formatDate(String isoDate) {
+  static String formatDate(String isoDate) { // parsing  date from iso format to usual format
     DateTime dateTime = DateTime.parse(isoDate);
     return DateFormat('yyyy-MM-dd').format(dateTime);
   }
