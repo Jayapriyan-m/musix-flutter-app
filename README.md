@@ -4,9 +4,16 @@ Musix is a Flutter-based music app integrated with iTunes, providing music previ
 
 ## Features
 
-- Displays random top artists' hits at the start.
-- Search field to search for songs.
-- Filter options for media type criteria and result order criteria.
+- Displays random top artists' hits at launch.
+- Search field to find songs easily.
+- Filter options for media type and result order.
+- Mark tracks as favorites with a heart icon in the list. Favorited tracks are accessible from the Favorite Tracks screen.
+- View and manage your favorite tracks on the Favorite Tracks screen. Remove tracks using the delete button.
+- Tap on a track to open a bottom sheet with the MusicPlayerPage for playback controls.
+- Uses shared preferences to persist favorite tracks even after app restarts.
+- Supports background playback, allowing music to continue when navigating away from the app. Manage state to avoid overlapping tracks.
+- Saves and restores music playback state when navigating back to the app.
+
 
 
 ## Getting Started
