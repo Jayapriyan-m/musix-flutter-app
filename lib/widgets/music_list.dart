@@ -8,43 +8,44 @@ import 'package:musix/screens/music_playing_page.dart';
 import 'package:musix/widgets/loading_animation.dart';
 
 class MusicPlayerWidget extends StatelessWidget {
-  final ItunesModel track;
-  final int currentIndex;
+  final ItunesModel track; // created track model
+  final int currentIndex; // current index of the tracked tapped by the user
+
   MusicPlayerWidget({required this.track, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
-    final MusicController musicController = Get.put(MusicController());
+    final MusicController musicController = Get.put(MusicController()); // initializing the music controller
 
     return InkWell(
       onTap: () {
-        // musicController.tracks.add(track);
-        musicController.currentTrackIndex.value = currentIndex ;
+        // Update the current track index and play the selected track
+        musicController.currentTrackIndex.value = currentIndex;
         musicController.playTrack(track);
-        // Get.to(MusicPlayerPage());
+
+        // showing the MusicPlayerPage as a bottom sheet
         showModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
           isScrollControlled: true,
           builder: (BuildContext context) {
-            return MusicPlayerPage();
+            return MusicPlayerPage(); // returning a music controllng bottom sheet
           },
         );
       },
       child: ListTile(
-        leading: Image.network(track.artworkUrl100),
-        title: Text(track.trackName),
-        subtitle: Text(track.artistName),
-        trailing: Icon(Icons.play_arrow),
+        leading: Image.network(track.artworkUrl100), // displaying track artwork
+        title: Text(track.trackName), // displaying track name
+        subtitle: Text(track.artistName), // displaying artist name
+        trailing: Icon(Icons.play_arrow), // play icon
       ),
     );
   }
 }
 
-
 // Dialog for playing music
-
-// void showMusicPlayerDialog(BuildContext context,track) {
+//
+// void showMusicPlayerDialog(BuildContext context, track) {
 //   showDialog(
 //     context: context,
 //     barrierDismissible: false,

@@ -12,75 +12,65 @@ import 'package:musix/widgets/countries_popup.dart';
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
-  final ItunesController controller =
-      Get.put(ItunesController(itunesService: ItunesService()));
+
+  // Initializing the ItunesController
+  final ItunesController controller = Get.put(ItunesController(itunesService: ItunesService()));
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+
     return AppBar(
-      title:
-          // Text(
-          //   'MusiX',
-          //   style: TextStyle(
-          //     fontSize: 24.0,
-          //     fontWeight: FontWeight.bold,
-          //     color: Colors.white,
-          //   ),
-          // ),
-          Padding(
+      title: Padding(
         padding: EdgeInsets.only(bottom: 3.h, right: 20.w),
         child: Image.asset(
-          "assets/applogomain.png",
+          "assets/applogomain.png", // Logo for the AppBar
           width: screenSize.width * 0.40,
           height: 38.h,
         ),
       ),
       centerTitle: true,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
+      backgroundColor: Colors.transparent, // Transparent background
+      elevation: 0, // No shadow
       flexibleSpace: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFEE353A),
+          color: Color(0xFFEE353A), // Solid color background
           // gradient: LinearGradient(
           //   colors: [Colors.red, Colors.redAccent.shade400],
           //   begin: Alignment.topCenter,
           //   end: Alignment.bottomCenter,
           // ),
           borderRadius: const BorderRadius.vertical(
-            bottom: Radius.circular(5.0),
+            bottom: Radius.circular(5.0), // Rounded bottom corners
           ),
         ),
         child: SafeArea(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end, // Align buttons to the right
             children: [
-              // IconButton(
-              //   icon: const Icon(Icons.menu, color: Colors.white),
-              //   onPressed: () {
-              //   },
-              // ),
               Obx(() {
                 return IconButton(
                   icon: Icon(
                     controller.isDarkMode.value
-                        ? Icons.nightlight_round // Icon for dark mode
-                        : Icons.wb_sunny, // Icon for light mode
+                        ? Icons.nightlight_round // Dark mode icon
+                        : Icons.wb_sunny, // Light mode icon
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    // controller.toggleTheme();
+                    // Show snackbar indicating that theme switching is under development
                     underDevelopmentSnackBar();
                   },
                 );
               }),
               IconButton(
-                  onPressed: (){
-                    Get.dialog(SelectCountry());
-                  },
-                  icon: Icon(
-                    Icons.language
-                  ))
+                onPressed: () {
+                  // Show a dialog popup to select a country
+                  Get.dialog(SelectCountry());
+                },
+                icon: Icon(
+                  Icons.language,
+                ),
+              ),
             ],
           ),
         ),

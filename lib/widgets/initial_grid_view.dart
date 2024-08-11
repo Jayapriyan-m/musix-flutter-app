@@ -7,23 +7,22 @@ import 'package:musix/screens/music_playing_page.dart';
 import 'package:musix/widgets/loading_animation.dart';
 
 class GridItem extends StatelessWidget {
-  final ItunesModel track;
-  final int currentIndex;
+  final ItunesModel track; // created track model
+  final int currentIndex; // current index of the tracked tapped by the user
 
-  GridItem({required this.track,required this.currentIndex});
+  GridItem({required this.track, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
+    final MusicController musicController = Get.put(MusicController()); // Initializing MusicController
 
-    final MusicController musicController = Get.put(MusicController());
-
-
-    return  GestureDetector(
-      onTap: (){
-        // musicController.tracks.add(track);
-        musicController.currentTrackIndex.value = currentIndex ;
+    return GestureDetector(
+      onTap: () {
+        // setting the current track index and playing the selected track
+        musicController.currentTrackIndex.value = currentIndex;
         musicController.playTrack(track);
-        // Get.to(MusicPlayerPage());
+
+        // Showing the MusicPlayerPage as a bottom sheet
         showModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
@@ -43,19 +42,19 @@ class GridItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: Image.network(
-                track.artworkUrl100,
+                track.artworkUrl100, // URL for the track artwork
                 height: double.infinity,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.cover, // it covers the full card
               ),
             ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0),
                 gradient: LinearGradient(
-                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
+                  colors: [Colors.black.withOpacity(0.6), Colors.transparent], // Gradient from black to transparent
+                  begin: Alignment.bottomCenter, // from bottom centre
+                  end: Alignment.topCenter, // to top centre
                 ),
               ),
             ),
@@ -64,20 +63,20 @@ class GridItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Spacer(),
+                  Spacer(), // pushing the content to the bottom of the card
                   Container(
                     width: 120.w,
                     child: Text(
-                      track.trackName,
+                      track.trackName, // Displaying the track name
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
+                        color: Colors.white, // Text color
+                        fontSize: 12, // Font size
                         fontWeight: FontWeight.bold,
-                        overflow: TextOverflow.ellipsis
+                        overflow: TextOverflow.ellipsis, // Ellipsis for text overflow -> it shows .... when over flows
                       ),
                     ),
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(height: 4), // Space between track name and price
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.8),
@@ -85,10 +84,10 @@ class GridItem extends StatelessWidget {
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                     child: Text(
-                      "\$ ${track.trackPrice}",
+                      "\$ ${track.trackPrice}", // Displaying the track price
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 10,
+                        color: Colors.black, // Text color
+                        fontSize: 10, // Font size
                       ),
                     ),
                   ),

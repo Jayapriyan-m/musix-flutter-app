@@ -10,27 +10,28 @@ class MusixDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ItunesController controller = Get.find<ItunesController>();
+
     return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text('Bat Man'),
-              accountEmail: Text('batman@dc.com'),
+              accountName: Text('Bat Man'), // demo account name
+              accountEmail: Text('batman@dc.com'), // demo account email
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                backgroundImage: AssetImage('assets/batman.jpeg'),
+                backgroundColor: Colors.white, //  background color of the avatar
+                backgroundImage: AssetImage('assets/batman.jpeg'), // avatar image
               ),
             ),
-            Obx((){
+            Obx(() {
               return ListTile(
                 leading: Icon(Icons.language),
-                title: Text('Current Region : ${controller.selectedCountry.value}'),
+                title: Text('Current Region : ${controller.selectedCountry.value}'), // Displaying the currently selected region
                 onTap: () {
                   // if(controller.searchFieldController.text.isNotEmpty){
                   //   Get.back() ;
                   // }
-                  Get.dialog(SelectCountry());
+                  Get.dialog(SelectCountry()); // Opening the country selection dialog
                 },
               );
             }),
@@ -38,7 +39,7 @@ class MusixDrawer extends StatelessWidget {
               leading: Icon(Icons.info),
               title: Text('About'),
               onTap: () {
-                Get.to(AboutPage());
+                Get.to(AboutPage()); // Navigating to the about page
               },
             ),
           ],

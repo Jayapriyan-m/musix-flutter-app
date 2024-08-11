@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Custom dropdown code got from official Flutter web
 class DropdownCountry<T> extends StatefulWidget {
   final Widget child;
   final void Function(T) onChange;
@@ -10,7 +11,7 @@ class DropdownCountry<T> extends StatefulWidget {
   final Icon? icon;
   final bool hideIcon;
   final bool leadingIcon;
-  final bool showSearchBox; // Added property to control search box visibility
+  final bool showSearchBox;
 
   DropdownCountry({
     Key? key,
@@ -23,7 +24,7 @@ class DropdownCountry<T> extends StatefulWidget {
     this.leadingIcon = false,
     required this.onChange,
     required this.selectedValue,
-    this.showSearchBox = true, // Default value: show search box
+    this.showSearchBox = true,
   }) : super(key: key);
 
   @override
@@ -41,7 +42,7 @@ class _DropdownCountryState<T> extends State<DropdownCountry<T>>
   late Animation<double> _rotateAnimation;
   late TextEditingController _searchController;
   List<DropdownItem<T>> _filteredItems = [];
-  bool _isSearching = false; // Added state to manage search box visibility
+  bool _isSearching = false;
 
   @override
   void initState() {

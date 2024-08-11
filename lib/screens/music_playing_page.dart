@@ -8,12 +8,13 @@ import 'package:musix/widgets/loading_animation.dart';
 class MusicPlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Finding the necessary controllers
     final MusicController musicController = Get.find<MusicController>();
     final ItunesController itunesController = Get.find<ItunesController>();
 
     return Material(
       child: Container(
-        // height: MediaQuery.of(context).size.height * 0.75,
+        // Styling the container with a black background and rounded corners
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -28,6 +29,7 @@ class MusicPlayerPage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Obx(() {
+            // Getting the current track details
             final searchResults = itunesController.searchResults;
             final currentIndex = musicController.currentTrackIndex.value;
             final track = searchResults.isNotEmpty && currentIndex < searchResults.length
@@ -42,10 +44,11 @@ class MusicPlayerPage extends StatelessWidget {
               releaseDate: '',
               trackPrice: 0.0,
             ));
-      
+
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Adding a small drag handle at the top
                 Container(
                   width: 40,
                   height: 5,
@@ -55,11 +58,13 @@ class MusicPlayerPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                // Displaying the track name
                 Text(
                   track.trackName,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
+                // Showing the album artwork or a default icon if not available
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -69,6 +74,7 @@ class MusicPlayerPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
+                // Handling the play/pause state with a message or loading animation
                 track.previewUrl.isNotEmpty
                     ? !musicController.isPlaying.value || musicController.isPaused.value
                     ? Padding(
@@ -78,9 +84,11 @@ class MusicPlayerPage extends StatelessWidget {
                     : MusicLoading()
                     : Text("Music not available :("),
                 SizedBox(height: 20),
+                // Showing the playback controls if the track is available
                 track.previewUrl.isNotEmpty
                     ? Column(
                   children: [
+                    // Adding a slider to control track position
                     Slider(
                       value: musicController.position.value.inSeconds.toDouble(),
                       min: 0,
@@ -90,6 +98,7 @@ class MusicPlayerPage extends StatelessWidget {
                         musicController.audioPlayer.seek(position);
                       },
                     ),
+                    // Displaying playback control buttons (previous, play/pause, stop, next)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -128,3 +137,4 @@ class MusicPlayerPage extends StatelessWidget {
     );
   }
 }
+

@@ -10,12 +10,9 @@ import 'package:musix/widgets/dropdown_country.dart';
 class SelectCountry extends StatelessWidget {
   const SelectCountry({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-
     var screenSize = MediaQuery.of(context).size;
-    // var curCountry = 'All';
     final ItunesController controller = Get.find<ItunesController>();
 
     return AlertDialog(
@@ -29,17 +26,16 @@ class SelectCountry extends StatelessWidget {
       ),
       content: SingleChildScrollView(
         child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: screenSize.height * 0.3
-            ),
+          constraints: BoxConstraints(
+            maxHeight: screenSize.height * 0.3, // height of the content
+          ),
           child: Obx(() => DropdownCountry<String>(
-            hideIcon: false,
-            child: Text('Select Mode',style: TextStyle(
-              color: Colors.white
-            ),),
+            hideIcon: false, // Showing the dropdown icon
+            child: Text('Select Country', style: TextStyle(color: Colors.white),), // Label for the dropdown
             items: controller.countries
                 .map((country) {
-                   // curCountry = country.code;
+              // Mapping each country to a DropdownItem
+              // curCountry = country.code;
               return DropdownItem<String>(
                 value: country.code,
                 child: Text(
@@ -49,29 +45,28 @@ class SelectCountry extends StatelessWidget {
               );
             }).toList(),
             onChange: (country) {
+              // Updating the selected country in the controller
               // curCountry = CountryService.countryList.keys.firstWhere(
               //         (k) => CountryService.countryList[k] == country);
               // print("curr-->$curCountry");
               controller.updateCountry(
-                  country);
-              Get.back();
+                  country); // Setting the selected country
+              Get.back(); // Closing the dialog
             },
-            selectedValue:  controller.selectedCountry.value,
+            selectedValue: controller.selectedCountry.value, // Setting the currently selected country
             dropdownButtonStyle: DropdownButtonStyle(
-              width: screenSize.width / 3.7,
-              height: 30.h,
+              width: screenSize.width / 3.7, // width of the dropdown button
+              height: 30.h, //  height of the dropdown button
             ),
             dropdownStyle: DropdownStyle(
               padding: EdgeInsets.all(2),
               constraints: BoxConstraints(
-                maxHeight:
-                140.h, // Set the maximum height for the dropdown menu
+                maxHeight: 140.h, // maximum height of the dropdown menu
               ),
-            ),// Hide the search box
+            ), // Hiding the search box inside the dropdown
           )),
         ),
       ),
-
     );
   }
 }

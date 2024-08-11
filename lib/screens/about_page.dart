@@ -109,14 +109,20 @@ class AboutPage extends StatelessWidget {
             SizedBox(height: 5),
             ElevatedButton(
               onPressed: () async {
+                // Defining the URL to be launched
                 final Uri url = Uri.parse('https://github.com/Jayapriyan-m/musix-flutter-app');
+
+                // Checking if the URL can be launched
                 if (await canLaunchUrl(url)) {
+                  // Launching the URL if it's valid
                   await launchUrl(url);
                 } else {
+                  // Showing an error message if the URL couldn't be launched
                   Get.snackbar('Error', 'Could not launch $url',
                       snackPosition: SnackPosition.BOTTOM);
                 }
               },
+
               child: Text('GitHub Repo'),
             ),
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Dropdown extends StatelessWidget {
-  final String? selectedValue;
-  final List<String> items;
-  final ValueChanged<String?>? onChanged;
-  final String title;
-  final String firstValue;
+  final String? selectedValue; // holds the currently selected value
+  final List<String> items; // items to be displayed in the dropdown
+  final ValueChanged<String?>? onChanged; // Callback for when a new item is selected
+  final String title; // dropdown header
+  final String firstValue; // default value
 
   const Dropdown({
     Key? key,
@@ -25,41 +25,41 @@ class Dropdown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: (selectedValue != firstValue) ? 110.w : 84.w,
-            padding: EdgeInsets.only(left: 9.w,top: 6.h,bottom: 6.h),
+            width: (selectedValue != firstValue) ? 110.w : 84.w, // Adjusting width based on selection
+            padding: EdgeInsets.only(left: 9.w, top: 6.h, bottom: 6.h), // Padding inside the container
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: (selectedValue != firstValue) ? Color(0xFFEE353A) : Color.fromARGB(255,48,48,48,),
+              color: (selectedValue != firstValue) ? Color(0xFFEE353A) : Color.fromARGB(255, 48, 48, 48), // Changing color based on selection
             ),
             child: Row(
               children: [
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: 13.sp, // adjustable font size
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 (selectedValue != firstValue)
                     ? Row(
-                        children: [
-                          SizedBox(
-                            width: 4.5.w,
-                          ),
-                          Icon(
-                            Icons.check,
-                            size: 18.sp,
-                          )
-                        ],
-                      )
-                    : Container()
+                  children: [
+                    SizedBox(
+                      width: 4.5.w,
+                    ),
+                    Icon(
+                      Icons.check,
+                      size: 18.sp,
+                    )
+                  ],
+                )
+                    : Container() // hiding check icon if no selection
               ],
             ),
           ),
           SizedBox(height: 8.h),
           Container(
-            height: 40.h,
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            height: 40.h, // height of the dropdown button
+            padding: EdgeInsets.symmetric(horizontal: 10), // horizontal padding inside the dropdown button
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               border: Border.all(
@@ -72,25 +72,25 @@ class Dropdown extends StatelessWidget {
                   color: (selectedValue != firstValue)
                       ? Color(0xFFEE353A).withOpacity(0.1)
                       : Colors.black.withOpacity(0.1),
-                  blurRadius: 8,
+                  blurRadius: 8, // blur radius for the shadow
                   offset: Offset(2, 2),
                 ),
               ],
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                value: selectedValue,
-                onChanged: onChanged,
+                value: selectedValue, // Currently selected value
+                onChanged: onChanged, // Callback for when a new item is selected
                 items: items.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
-                    value: value.toLowerCase(),
+                    value: value.toLowerCase(), // Value for each item
                     child: Text(
-                      value,
+                      value, // Displaying text for each item
                       style: TextStyle(
                           color:
-                              (selectedValue != firstValue && selectedValue == value)
-                                  ? Color(0xFFEE353A)
-                                  : Colors.white,
+                          (selectedValue != firstValue && selectedValue == value)
+                              ? Color(0xFFEE353A)
+                              : Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 13.sp),
                     ),
@@ -101,7 +101,6 @@ class Dropdown extends StatelessWidget {
                   color: Colors.white,
                 ),
                 dropdownColor: Colors.black,
-                // isExpanded: true,
               ),
             ),
           ),
