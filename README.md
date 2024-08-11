@@ -14,7 +14,8 @@ Musix is a Flutter-based music app integrated with iTunes, providing music previ
 - Supports background playback, allowing music to continue when navigating away from the app. Manage state to avoid overlapping tracks.
 - Saves and restores music playback state when navigating back to the app.
 
-
+## Download apk
+[Google Drive Link](https://drive.google.com/file/d/11ShWA-BIVUO9dauQROdNjJ1ftCr0O8_f/view?usp=sharing) (Musix.apk)
 
 ## Getting Started
 
