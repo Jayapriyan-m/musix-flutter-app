@@ -1,26 +1,28 @@
-# Musix - Flutter Music App
+# Musix - Flutter Music Player App
 
 Musix is a Flutter-based music app integrated with iTunes, providing music previews. The app features random top artist hits, a search field for songs, and filter options for media type and result order.
 
 ## Features
+- 🎵 **Random Top Artists' Hits:** Displays random top artists' hits at launch.
+- 🔍 **Search:** Find songs easily with the search field.
+- 🎛️ **Filters:** Filter options for media type and result order.
+- ❤️ **Favorite Tracks:** Mark tracks as favorites with a heart icon in the list. Favorited tracks are accessible from the Favorite Tracks screen.
+- 🎶 **MusicPlayerPage:** Tap on a track to open a bottom sheet with playback controls.
+- 💾 **Persistence:** Uses shared preferences to persist favorite tracks even after app restarts.
+- 🔄 **Background Playback:** Supports background playback and saves/restores music playback state when navigating back to the app.
 
-- Displays random top artists' hits at launch.
-- Search field to find songs easily.
-- Filter options for media type and result order.
-- Mark tracks as favorites with a heart icon in the list. Favorited tracks are accessible from the Favorite Tracks screen.
-- View and manage your favorite tracks on the Favorite Tracks screen. Remove tracks using the delete button.
-- Tap on a track to open a bottom sheet with the MusicPlayerPage for playback controls.
-- Uses shared preferences to persist favorite tracks even after app restarts.
-- Supports background playback, allowing music to continue when navigating away from the app. Manage state to avoid overlapping tracks.
-- Saves and restores music playback state when navigating back to the app.
 
+## Download APK
+You can download the latest APK from the link below:
+
+[**Download Musix.apk**](https://drive.google.com/file/d/11ShWA-BIVUO9dauQROdNjJ1ftCr0O8_f/view?usp=sharing)
 
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Flutter](https://flutter.dev/docs/get-started/install) (version 3.7.6)
+- [Flutter](https://flutter.dev/docs/get-started/install) (version 3.19.6)
 - A suitable IDE (like Android Studio or Visual Studio Code)
 
 ### Installation
@@ -41,8 +43,13 @@ Musix is a Flutter-based music app integrated with iTunes, providing music previ
    ```bash
    flutter run
 
+
 ## Contact
-For any inquiries or feedback, please reach out to:
-- Name : Jayapriyan M
-- Email : jayapriyan11802@gmail.com
+For any inquiries or feedback, feel free to reach out:
+
+- **Name:** Jayapriyan M
+- **Email:** [jayapriyan11802@gmail.com](mailto:jayapriyan11802@gmail.com)
+
+Happy Coding! 🎧
+
   
